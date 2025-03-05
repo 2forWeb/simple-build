@@ -1,2 +1,4 @@
 # simple-build
-SImple build system taking on ESBuild and standarizing a few things
+
+Simple build system taking on ESBuild and standardizing a few things.
+

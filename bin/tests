@@ -1,0 +1,33 @@
+#! /bin/sh
+
+echo "------------- Linter -------------"
+
+if ! npm run lint
+then
+  echo "Linting failed"
+  exit 1
+fi
+
+echo "----------- TypeScript ----------"
+
+if ! npm run typecheck
+then
+  echo "Typechecking failed"
+  exit 1
+fi
+
+echo "------------- Build -------------"
+
+if ! npm run build
+then
+  echo "Build failed"
+  exit 1
+fi
+
+echo "------------- Tests -------------"
+
+if ! npm run test
+then
+  echo "Tests failed"
+  exit 1
+fi

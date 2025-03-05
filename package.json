@@ -1,0 +1,36 @@
+{
+    "name": "@2forweb/simple-build",
+    "version": "1.0.0",
+    "description": "Simple build system based in ESBuild",
+    "scripts": {
+        "lint": "./node_modules/.bin/eslint ./src --ext .ts",
+        "typecheck": "./node_modules/.bin/tsc --project ./src/tsconfig.json",
+        "build": "node ./build.js",
+        "test": "echo \"Not implemented\""
+    },
+    "keywords": [
+        "build",
+        "esbuild",
+        "system",
+        "simple"
+    ],
+    "homepage": "https://github.com/2forWeb/simple-build#readme",
+    "bugs": {
+        "url": "https://github.com/2forWeb/simple-build/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/2forWeb/simple-build.git"
+    },
+    "license": "MIT",
+    "author": "Matias José",
+    "type": "module",
+    "main": "dist/index.js",
+    "devDependencies": {
+        "@eslint/js": "^9.21.0",
+        "esbuild": "^0.25.0",
+        "eslint": "^9.21.0",
+        "typescript": "^5.8.2",
+        "typescript-eslint": "^8.26.0"
+    }
+}
