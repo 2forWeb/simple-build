@@ -6,6 +6,7 @@
         "lint": "./node_modules/.bin/eslint ./src --ext .ts",
         "typecheck": "./node_modules/.bin/tsc --project ./src/tsconfig.json",
         "build": "node ./build.js",
+        "build:watch": "node ./build.js --watch",
         "test": "echo \"Not implemented\""
     },
     "keywords": [
@@ -28,6 +29,7 @@
     "main": "dist/index.js",
     "devDependencies": {
         "@eslint/js": "^9.21.0",
+        "@types/node": "^22.13.9",
         "esbuild": "^0.25.0",
         "eslint": "^9.21.0",
         "typescript": "^5.8.2",

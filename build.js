@@ -1,7 +1,21 @@
 import * as esbuild from 'esbuild';
+import process from 'node:process';
 
-await esbuild.build({
+const isWatch = process.argv.includes('--watch');
+
+const buildOptions = {
     entryPoints: ['src/index.ts'],
     outfile: './dist/index.js',
+    platform: 'node',
+    format: 'esm',
     bundle: true,
-});
+};
+
+if (isWatch) {
+    const ctx = await esbuild.context(buildOptions);
+
+    await ctx.watch();
+    console.log('watching...');
+} else {
+    await esbuild.build(buildOptions);
+}
