@@ -10,7 +10,7 @@ fi
 
 echo "----------- TypeScript ----------"
 
-if ! npm run typecheck
+if ! npm run definitions
 then
   echo "Typechecking failed"
   exit 1

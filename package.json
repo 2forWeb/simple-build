@@ -4,7 +4,7 @@
     "description": "Simple build system based in ESBuild",
     "scripts": {
         "lint": "./node_modules/.bin/eslint ./src --ext .ts",
-        "typecheck": "./node_modules/.bin/tsc --project ./src/tsconfig.json",
+        "definitions": "./node_modules/.bin/tsc --project ./src/tsconfig.json",
         "build": "node ./build.js",
         "build:watch": "node ./build.js --watch",
         "test": "echo \"Not implemented\""
@@ -27,6 +27,7 @@
     "author": "Matias José",
     "type": "module",
     "main": "dist/index.js",
+    "types": "dist/**/*.d.ts",
     "devDependencies": {
         "@eslint/js": "^9.21.0",
         "@types/node": "^22.13.9",
@@ -34,5 +35,15 @@
         "eslint": "^9.21.0",
         "typescript": "^5.8.2",
         "typescript-eslint": "^8.26.0"
+    },
+    "dependencies": {
+        "console-log-colors": "^0.5.0",
+        "dotenv": "^16.4.7",
+        "esbuild-copy-files-plugin": "^1.2.1",
+        "esbuild-plugin-clean": "^1.0.1",
+        "esbuild-sass-plugin": "^3.3.1",
+        "eslint-config-prettier": "^10.0.2",
+        "eslint-plugin-prettier": "^5.2.3",
+        "prettier": "^3.5.3"
     }
 }
