@@ -49,7 +49,7 @@ export default class BuildTask {
             ...this.getMinifyAndSourMapOptions(),
             ...this.ResolveOutDir(entry.outDir),
             ...this.ResolveOutFile(entry.outFile),
-            ...this.AddCleanPatterns(entry.cleanPatterns),
+            ...this.AddPlugins(entry.plugins, entry.cleanPatterns),
         };
     }
 
@@ -86,10 +86,13 @@ export default class BuildTask {
         return outFile ? { outfile: path.resolve(this.assetRoot, outFile) } : undefined;
     }
 
-    AddCleanPatterns(cleanPatterns?: string[]): Partial<esbuild.BuildOptions> | undefined {
+    AddPlugins(plugins?: esbuild.Plugin[], cleanPatterns?: string[]): Partial<esbuild.BuildOptions> | undefined {
         return cleanPatterns
             ? {
-                  plugins: [clean({ patterns: cleanPatterns.map((pattern) => path.resolve(this.assetRoot, pattern)) })],
+                  plugins: [
+                      ...(plugins || []),
+                      clean({ patterns: cleanPatterns.map((pattern) => path.resolve(this.assetRoot, pattern)) }),
+                  ],
               }
             : undefined;
     }

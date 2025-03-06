@@ -9,6 +9,7 @@ const buildOptions = {
     platform: 'node',
     format: 'esm',
     bundle: true,
+    external: ['esbuild'],
 };
 
 if (isWatch) {

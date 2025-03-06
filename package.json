@@ -7,7 +7,7 @@
         "definitions": "./node_modules/.bin/tsc --project ./src/tsconfig.json",
         "build": "node ./build.js",
         "build:watch": "node ./build.js --watch",
-        "test": "echo \"Not implemented\""
+        "test": "jest"
     },
     "keywords": [
         "build",
@@ -29,10 +29,15 @@
     "main": "dist/index.js",
     "types": "dist/**/*.d.ts",
     "devDependencies": {
+        "@babel/preset-env": "^7.26.9",
         "@eslint/js": "^9.21.0",
+        "@jest/globals": "^29.7.0",
         "@types/node": "^22.13.9",
+        "babel-jest": "^29.7.0",
         "esbuild": "^0.25.0",
         "eslint": "^9.21.0",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.2.6",
         "typescript": "^5.8.2",
         "typescript-eslint": "^8.26.0"
     },
