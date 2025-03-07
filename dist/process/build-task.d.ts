@@ -21,6 +21,6 @@ export default class BuildTask {
     ResolveEntryPoints(entries?: string[]): Partial<esbuild.BuildOptions> | undefined;
     ResolveOutDir(outDir?: string): Partial<esbuild.BuildOptions> | undefined;
     ResolveOutFile(outFile?: string): Partial<esbuild.BuildOptions> | undefined;
-    AddCleanPatterns(cleanPatterns?: string[]): Partial<esbuild.BuildOptions> | undefined;
+    AddPlugins(plugins?: esbuild.Plugin[], cleanPatterns?: string[]): Partial<esbuild.BuildOptions> | undefined;
     GetBundle(): boolean;
 }
