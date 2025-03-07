@@ -89,14 +89,15 @@ export default class BuildTask {
     }
 
     AddPlugins(plugins?: esbuild.Plugin[], cleanPatterns?: string[]): Partial<esbuild.BuildOptions> | undefined {
-        return cleanPatterns
-            ? {
-                  plugins: [
-                      ...(plugins || []),
-                      clean({ patterns: cleanPatterns.map((pattern) => path.resolve(this.assetRoot, pattern)) }),
-                  ],
-              }
-            : undefined;
+        const outPlugins = plugins ?? [];
+
+        if (cleanPatterns) {
+            outPlugins.push(clean({ patterns: cleanPatterns.map((pattern) => path.resolve(this.assetRoot, pattern)) }));
+        }
+
+        return {
+            plugins: outPlugins,
+        };
     }
 
     GetBundle() {
