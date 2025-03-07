@@ -112,12 +112,13 @@ var BuildTask = class {
     return outFile ? { outfile: path.resolve(this.assetRoot, outFile) } : void 0;
   }
   AddPlugins(plugins, cleanPatterns) {
-    return cleanPatterns ? {
-      plugins: [
-        ...plugins || [],
-        clean({ patterns: cleanPatterns.map((pattern) => path.resolve(this.assetRoot, pattern)) })
-      ]
-    } : void 0;
+    const outPlugins = plugins ?? [];
+    if (cleanPatterns) {
+      outPlugins.push(clean({ patterns: cleanPatterns.map((pattern) => path.resolve(this.assetRoot, pattern)) }));
+    }
+    return {
+      plugins: outPlugins
+    };
   }
   GetBundle() {
     return !!this.entry.outFile;
