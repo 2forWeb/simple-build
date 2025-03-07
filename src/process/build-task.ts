@@ -1,4 +1,4 @@
-import { color } from 'console-log-colors';
+import { color, bold } from '../util/colors';
 import { IEntry } from '../types/entry';
 import * as esbuild from 'esbuild';
 import { isDev } from '../util/is-dev';
@@ -54,17 +54,19 @@ export default class BuildTask {
     }
 
     PrintTaskName(): void {
-        console.log(color.grey('[  ]') + ' ' + color.green(`Running Task: ${this.GetTaskName()}...\n`));
+        console.log(color('white', '[  ]') + ' ' + color('green', `Running Task: ${this.GetTaskName()}...`) + '\n');
     }
 
     PrintDone(): void {
         console.log(
-            '\n' + color.bold(color.grey('[✔️]') + ' ' + color.green(`${this.GetTaskName()} finished successfully...\n`))
+            '\n' + bold(color('white', '[✔️]') + ' ' + color('green', `${this.GetTaskName()} finished successfully!`)) + '\n'
         );
     }
 
     PrintError(): void {
-        console.log('\n' + color.bold(color.grey('[❌]') + ' ' + color.red(`${this.GetTaskName()} finished with an error!\n`)));
+        console.log(
+            '\n' + bold(color('white', '[❌]') + ' ' + color('red', `${this.GetTaskName()} finished with an error!`)) + '\n'
+        );
     }
 
     getMinifyAndSourMapOptions(): { minify: boolean; sourcemap: boolean } {

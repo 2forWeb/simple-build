@@ -1,6 +1,6 @@
 # simple-build
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/2forWeb/simple-build)
+[![Version](https://img.shields.io/badge/version-1.0.2-blue.svg)](https://github.com/2forWeb/simple-build)
 [![Lint](https://github.com/2forWeb/simple-build/actions/workflows/lint.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/lint.yaml)
 [![TypeCheck](https://github.com/2forWeb/simple-build/actions/workflows/typecheck.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/typecheck.yaml)
 [![Build](https://github.com/2forWeb/simple-build/actions/workflows/build.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/build.yaml)
@@ -51,10 +51,11 @@ Write a js build file on the root of your application like this:
 
 ```javascript
 import { build, BuildTypeScript, BuildScss } from '@2forweb/simple-build';
+import * as path from 'path';
 
 await build({
-    clientRoot: './client',
-    assetRoot: './assets',
+    clientRoot: path.resolve(__dirname, './client'),
+    assetRoot: path.resolve(__dirname, './assets'),
     buildTasks: [
         {
             name: 'TypeScript controller',
