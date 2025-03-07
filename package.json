@@ -7,7 +7,7 @@
         "definitions": "./node_modules/.bin/tsc --project ./src/tsconfig.json",
         "build": "node ./build.js",
         "build:watch": "node ./build.js --watch",
-        "publish": "npm run definitions && npm run build && npm run publish",
+        "publish": "npm run definitions && npm run build && npm publish",
         "test": "jest"
     },
     "keywords": [
