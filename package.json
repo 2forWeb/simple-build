@@ -1,13 +1,13 @@
 {
     "name": "@2forweb/simple-build",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Simple build system based in ESBuild",
     "scripts": {
         "lint": "./node_modules/.bin/eslint",
         "definitions": "./node_modules/.bin/tsc --project ./src/tsconfig.json",
         "build": "node ./build.js",
         "build:watch": "node ./build.js --watch",
-        "publish": "npm run definitions && npm run build && npm publish",
+        "publish:package": "npm run definitions && npm run build && npm publish",
         "test": "vitest run"
     },
     "keywords": [

@@ -23,6 +23,6 @@ export default class extends BuildTask {
 
         this.options.assetNames = '[dir]/[name]';
 
-        this.options.plugins = [...(this.options.plugins ? this.options.plugins : []), sassPlugin()];
+        this.options.plugins?.push(sassPlugin());
     }
 }
