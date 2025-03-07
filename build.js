@@ -5,11 +5,11 @@ const isWatch = process.argv.includes('--watch');
 
 const buildOptions = {
     entryPoints: ['src/index.ts'],
-    outfile: './dist/index.js',
+    outfile: './dist/index.mjs',
     platform: 'node',
     format: 'esm',
     bundle: true,
-    external: ['esbuild'],
+    external: ['esbuild', 'dotenv', 'esbuild-copy-files-plugin', 'esbuild-plugin-clean', 'esbuild-sass-plugin'],
 };
 
 if (isWatch) {

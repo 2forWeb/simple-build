@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import BasicConfig from './mocks/basic-config';
 import { build } from '../dist';
 import { readFileSync } from 'node:fs';
