@@ -1,6 +1,6 @@
 # simple-build
 
-[![Version](https://img.shields.io/badge/version-1.0.5-blue.svg)](https://github.com/2forWeb/simple-build)
+[![Version](https://img.shields.io/badge/version-1.0.7-blue.svg)](https://github.com/2forWeb/simple-build)
 [![Lint](https://github.com/2forWeb/simple-build/actions/workflows/lint.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/lint.yaml)
 [![TypeCheck](https://github.com/2forWeb/simple-build/actions/workflows/typecheck.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/typecheck.yaml)
 [![Build](https://github.com/2forWeb/simple-build/actions/workflows/build.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/build.yaml)
