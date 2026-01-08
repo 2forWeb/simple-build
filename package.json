@@ -1,6 +1,6 @@
 {
     "name": "@2forweb/simple-build",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Simple build system based in ESBuild",
     "scripts": {
         "lint": "./node_modules/.bin/eslint",
