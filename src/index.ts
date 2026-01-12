@@ -4,6 +4,8 @@ import { isWatching } from './util/is-watching';
 import { IConfig } from './types/config';
 import { color, bold } from './util/colors';
 import { getConfig } from './util/get-config';
+import { isServerMode } from './util/is-server-mode';
+import { startExpressServer } from './server/express';
 
 async function build(config: IConfig) {
     await buildAll(config);
@@ -32,4 +34,8 @@ async function build(config: IConfig) {
     }
 }
 
-await build(await getConfig());
+if (isServerMode()) {
+    startExpressServer();
+} else {
+    await build(await getConfig());
+}

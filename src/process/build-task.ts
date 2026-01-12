@@ -59,13 +59,13 @@ export default class BuildTask {
 
     PrintDone(): void {
         console.log(
-            '\n' + bold(color('white', '[✔️]') + ' ' + color('green', `${this.GetTaskName()} finished successfully!`)) + '\n'
+            '\n' + bold(color('white', '[✔]') + ' ' + color('green', `${this.GetTaskName()} finished successfully!`)) + '\n'
         );
     }
 
     PrintError(): void {
         console.log(
-            '\n' + bold(color('white', '[❌]') + ' ' + color('red', `${this.GetTaskName()} finished with an error!`)) + '\n'
+            '\n' + bold(color('white', '[X]') + ' ' + color('red', `${this.GetTaskName()} finished with an error!`)) + '\n'
         );
     }
 

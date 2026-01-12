@@ -9,7 +9,7 @@ const buildOptions = {
     platform: 'node',
     format: 'esm',
     bundle: true,
-    external: ['esbuild', 'dotenv', 'esbuild-copy-files-plugin', 'esbuild-plugin-clean', 'esbuild-sass-plugin'],
+    external: ['esbuild', 'dotenv', 'esbuild-copy-files-plugin', 'esbuild-plugin-clean', 'esbuild-sass-plugin', 'express'],
     plugins: [
         {
             name: 'add shebang',

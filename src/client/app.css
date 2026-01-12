@@ -1,43 +1,69 @@
-:root {
-    /* Core */
+:root, [data-theme=light] {
     --bg: #FAF7F2;
-    --surface: #FFFFFF;
+    --surface: #f3f1e8;
     --surface-alt: #F3EFE9;
     --border: #D9D3CB;
-
     --text-primary: #3E3A36;
     --text-secondary: #6F6963;
-
-    /* Accents */
     --accent-primary: #D47A55;
     --accent-primary-hover: #C56C49;
     --accent-secondary: #E3A26A;
     --highlight: #F2CDA0;
-
-    /* Feedback */
     --success: #6E9F72;
     --warning: #D8A24A;
     --error: #C45B4D;
 }
 
-[data-theme="dark"] {
-    /* Core */
+[data-theme=dark] {
     --bg: #1F1B18;
     --surface: #26221F;
     --surface-alt: #2E2925;
     --border: #4A443F;
-
     --text-primary: #EAE4DD;
     --text-secondary: #B8B1AA;
-
-    /* Accents */
     --accent-primary: #D47A55;
     --accent-primary-hover: #E08A63;
     --accent-secondary: #E3A26A;
     --highlight: #A67C52;
-
-    /* Feedback */
     --success: #7BAF7E;
     --warning: #D8A24A;
     --error: #C45B4D;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:
+            "Segoe UI",
+            Tahoma,
+            Geneva,
+            Verdana,
+            sans-serif;
+    background-color: var(--bg);
+    color: var(--text-primary);
+}
+
+a {
+    color: var(--accent-primary);
+    text-decoration: none;
+
+    :hover {
+        color: var(--accent-primary-hover);
+    }
+}
+
+code {
+    font-family:
+            "Courier New",
+            Courier,
+            monospace;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 400;
 }

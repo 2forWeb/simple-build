@@ -68,12 +68,12 @@ var BuildTask = class {
   }
   PrintDone() {
     console.log(
-      "\n" + bold(color("white", "[\u2714\uFE0F]") + " " + color("green", `${this.GetTaskName()} finished successfully!`)) + "\n"
+      "\n" + bold(color("white", "[\u2714]") + " " + color("green", `${this.GetTaskName()} finished successfully!`)) + "\n"
     );
   }
   PrintError() {
     console.log(
-      "\n" + bold(color("white", "[\u274C]") + " " + color("red", `${this.GetTaskName()} finished with an error!`)) + "\n"
+      "\n" + bold(color("white", "[X]") + " " + color("red", `${this.GetTaskName()} finished with an error!`)) + "\n"
     );
   }
   getMinifyAndSourMapOptions() {
@@ -167,11 +167,11 @@ var typescript_default = class extends BuildTask {
     if (this.options?.plugins?.length) {
       await esbuild2.build(this.options);
     }
-    return new Promise((resolve2, reject) => {
+    return new Promise((resolve3, reject) => {
       exec(`./node_modules/.bin/tsc --project ${path4}`, (error, stdout, stderr) => {
         console.log(stdout);
         if (error === null) {
-          resolve2();
+          resolve3();
         }
         console.log(stderr);
         reject(error);
@@ -236,6 +236,27 @@ async function getConfig() {
   };
 }
 
+// src/util/is-server-mode.ts
+function isServerMode() {
+  return process.argv.some((arg) => arg.startsWith("serve"));
+}
+
+// src/server/express.ts
+import express from "express";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve as resolve2 } from "node:path";
+var __filename = fileURLToPath(import.meta.url);
+var __dirname = dirname(__filename);
+function startExpressServer() {
+  const app = express();
+  const port = 3333;
+  const publicDir = resolve2(__dirname, "../public");
+  app.use(express.static(publicDir));
+  app.listen(port, () => {
+    console.log(`Simple-Build Listening on port ${port}`);
+  });
+}
+
 // src/index.ts
 async function build3(config) {
   await buildAll(config);
@@ -256,4 +277,8 @@ async function build3(config) {
     }
   }
 }
-await build3(await getConfig());
+if (isServerMode()) {
+  startExpressServer();
+} else {
+  await build3(await getConfig());
+}
