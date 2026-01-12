@@ -3,18 +3,20 @@ import tseslint from 'typescript-eslint';
 import globals from 'globals';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import pluginVue from 'eslint-plugin-vue';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
     {
-        files: ['./**/*.{js,ts}'],
+        files: ['src/client/**/*.{js,ts,vue}'],
     },
     {
-        ignores: ['node_modules/', 'dist/', 'public/', 'src/client/'],
+        ignores: ['node_modules/', 'dist/', 'public/', 'tests/'],
     },
     {
-        languageOptions: { globals: globals.node, sourceType: 'module' },
+        languageOptions: { globals: globals.browser, sourceType: 'module' },
     },
+    ...pluginVue.configs['flat/recommended'],
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
     eslintConfigPrettier,

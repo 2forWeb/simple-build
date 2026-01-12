@@ -3,7 +3,7 @@
     "version": "1.0.7",
     "description": "Simple build system based in ESBuild",
     "scripts": {
-        "lint": "./node_modules/.bin/eslint",
+        "lint": "./node_modules/.bin/eslint && ./node_modules/.bin/eslint --config ./src/client/eslint.config.js",
         "build": "node ./build.js",
         "build:vue": "npx vite build",
         "build:watch": "node ./build.js --watch",
@@ -46,6 +46,7 @@
         "eslint": "^9.21.0",
         "eslint-config-prettier": "^10.0.2",
         "eslint-plugin-prettier": "^5.2.3",
+        "eslint-plugin-vue": "^10.6.2",
         "prettier": "^3.5.3",
         "typescript": "^5.8.2",
         "typescript-eslint": "^8.26.0",
