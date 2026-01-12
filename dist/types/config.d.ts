@@ -1,8 +1,8 @@
 import { IEntry } from './entry';
-import BuildTask from '../process/build-task';
+export type TaskName = 'build' | 'scss' | 'copy-files' | 'typescript';
 export interface IBuildTask {
-    name: string;
-    task: typeof BuildTask;
+    name: TaskName;
+    task: string;
     entry: IEntry;
 }
 export interface IConfig {

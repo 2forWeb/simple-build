@@ -12,7 +12,7 @@ const buildOptions = {
     external: ['esbuild', 'dotenv', 'esbuild-copy-files-plugin', 'esbuild-plugin-clean', 'esbuild-sass-plugin'],
     plugins: [
         {
-            'name': 'add shebang',
+            name: 'add shebang',
             setup: (build) => {
                 build.onEnd(async (result) => {
                     if (result.errors.length === 0) {
