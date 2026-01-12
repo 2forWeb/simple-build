@@ -13,7 +13,7 @@ export default [
         ignores: ['node_modules/', 'dist/'],
     },
     {
-        languageOptions: { globals: globals.node },
+        languageOptions: { globals: globals.node, sourceType: 'module' },
     },
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,

@@ -1,13 +1,10 @@
-import { BuildTask } from '../../dist';
-import * as path from 'path';
-
 export default {
-    clientRoot: path.resolve(__dirname, './client'),
-    assetRoot: path.resolve(__dirname, './dist'),
+    clientRoot: './client',
+    assetRoot: './dist',
     buildTasks: [
         {
             name: 'Test building a typescript file',
-            task: BuildTask,
+            task: 'build',
             entry: {
                 entryPoints: ['./index.ts'],
                 outFile: './index.js',

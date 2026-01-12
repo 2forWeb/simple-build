@@ -10,6 +10,9 @@
         "publish:package": "npm run definitions && npm run build && npm publish",
         "test": "vitest run"
     },
+    "bin": {
+        "simple-build": "dist/index.mjs"
+    },
     "keywords": [
         "build",
         "esbuild",

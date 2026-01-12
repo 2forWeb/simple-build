@@ -1,24 +1,4 @@
-// src/util/get-build-tasks.ts
-function getBuildTasks(config) {
-  return config.buildTasks.map(
-    (buildTask) => new buildTask.task(buildTask.name, config.clientRoot, config.assetRoot, buildTask.entry)
-  );
-}
-
-// src/process/build-all.ts
-async function buildAll(config) {
-  const tasks = getBuildTasks(config);
-  await Promise.all(tasks.map((task) => task.RunTask()));
-}
-
-// src/index.ts
-import { watch } from "fs/promises";
-
-// src/util/is-watching.ts
-function isWatching() {
-  return process.argv.some((arg) => arg.startsWith("watch"));
-}
-
+#!/usr/bin/env node
 // src/util/colors.ts
 var colors = {
   red: "\x1B[31m",
@@ -187,11 +167,11 @@ var typescript_default = class extends BuildTask {
     if (this.options?.plugins?.length) {
       await esbuild2.build(this.options);
     }
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve2, reject) => {
       exec(`./node_modules/.bin/tsc --project ${path4}`, (error, stdout, stderr) => {
         console.log(stdout);
         if (error === null) {
-          resolve();
+          resolve2();
         }
         console.log(stderr);
         reject(error);
@@ -199,6 +179,62 @@ var typescript_default = class extends BuildTask {
     });
   }
 };
+
+// src/util/get-task.ts
+var tasks = {
+  build: BuildTask,
+  scss: build_scss_default,
+  "copy-files": copy_files_default,
+  typescript: typescript_default
+};
+function getTask(task) {
+  return tasks[task];
+}
+
+// src/util/get-build-tasks.ts
+function getBuildTasks(config) {
+  return config.buildTasks.map((buildTask) => {
+    const TaskClass = getTask(buildTask.task);
+    if (!TaskClass) {
+      throw new Error(`Unknown build task: ${buildTask.task}`);
+    }
+    return new TaskClass(buildTask.name, config.clientRoot, config.assetRoot, buildTask.entry);
+  });
+}
+
+// src/process/build-all.ts
+async function buildAll(config) {
+  const tasks2 = getBuildTasks(config);
+  await Promise.all(tasks2.map((task) => task.RunTask()));
+}
+
+// src/index.ts
+import { watch } from "fs/promises";
+
+// src/util/is-watching.ts
+function isWatching() {
+  return process.argv.some((arg) => arg.startsWith("watch"));
+}
+
+// src/util/get-config.ts
+import { resolve } from "path";
+import { existsSync } from "fs";
+async function getConfig() {
+  const configFileNames = ["simple-build.config.js", "simple-build.config.cjs", "simple-build.config.mjs"];
+  const curDir = process.cwd();
+  for (let i = 0; i < configFileNames.length; i++) {
+    const configFilePath = resolve(curDir, configFileNames[i]);
+    if (existsSync(configFilePath)) {
+      const configModule = await import(configFilePath);
+      return configModule.default || configModule;
+    }
+  }
+  return {
+    clientRoot: resolve(curDir, "./client"),
+    assetRoot: resolve(curDir + "./assets"),
+    buildTasks: []
+  };
+}
 
 // src/index.ts
 async function build3(config) {
@@ -220,10 +256,4 @@ async function build3(config) {
     }
   }
 }
-export {
-  build_scss_default as BuildScss,
-  BuildTask,
-  typescript_default as BuildTypeScript,
-  copy_files_default as CopyFiles,
-  build3 as build
-};
+await build3(await getConfig());

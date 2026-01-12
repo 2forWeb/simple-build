@@ -2,17 +2,14 @@ import { buildAll } from './process/build-all';
 import { watch } from 'fs/promises';
 import { isWatching } from './util/is-watching';
 import { IConfig } from './types/config';
-import BuildTask from './process/build-task';
-import BuildScss from './process/build-scss';
-import CopyFiles from './process/copy-files';
-import BuildTypeScript from './process/typescript';
 import { color, bold } from './util/colors';
+import { getConfig } from './util/get-config';
 
 async function build(config: IConfig) {
     await buildAll(config);
 
     if (isWatching()) {
-        let timeout: NodeJS.Timeout | null = null;
+        let timeout: NodeJS.Timeout | number | null = null;
         const watcher = watch(config.clientRoot, { recursive: true });
 
         console.log(bold(color('yellow', '--- Watching for changes ---')) + '\n');
@@ -35,4 +32,4 @@ async function build(config: IConfig) {
     }
 }
 
-export { build, BuildTask, BuildScss, CopyFiles, BuildTypeScript };
+await build(await getConfig());
