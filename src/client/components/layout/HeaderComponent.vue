@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import ThemeIcon from '../ux/ThemeIcon.vue';
+import ThemeIcon from '../ux/theme/ThemeIcon.vue';
 </script>
 
 <style module>

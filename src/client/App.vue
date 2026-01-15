@@ -2,7 +2,9 @@
     <div :class="$style.container">
         <HeaderComponent />
 
-        <div style="flex-grow: 1"></div>
+        <div style="flex-grow: 1">
+            <h1>Content Here!</h1>
+        </div>
 
         <FooterComponent />
     </div>
