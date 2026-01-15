@@ -1,8 +1,8 @@
-import BuildTask from '../process/build-task';
-import BuildScss from '../process/build-scss';
-import CopyFiles from '../process/copy-files';
-import TypeScript from '../process/typescript';
-import { TaskName } from '../types/config';
+import BuildTask from '@process/build-task';
+import BuildScss from '@process/build-scss';
+import CopyFiles from '@process/copy-files';
+import TypeScript from '@process/typescript';
+import type { TaskName } from '@interfaces/config';
 
 type TaskClass = typeof BuildTask | typeof BuildScss | typeof CopyFiles | typeof TypeScript;
 

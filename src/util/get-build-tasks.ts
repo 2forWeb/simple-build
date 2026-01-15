@@ -1,4 +1,4 @@
-import { IConfig, TaskName } from '../types/config';
+import type { IConfig, TaskName } from '@interfaces/config';
 import { getTask } from './get-task';
 
 export function getBuildTasks(config: IConfig) {

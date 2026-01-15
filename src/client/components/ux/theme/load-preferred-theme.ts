@@ -1,4 +1,4 @@
-import { getCookie, setCookie } from '../../../utils/cookie';
+import { getCookie, setCookie } from '@client/utils/cookie';
 import { getPreferredColorTheme } from './get-preferred-color-theme';
 import { themeState } from './state';
 

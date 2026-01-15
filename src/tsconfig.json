@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "outDir": "../../dist",
+    "outDir": "../dist",
     "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
@@ -17,8 +17,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "paths": {
+      "@interfaces/*": ["./interfaces/*"],
+      "@util/*": ["./util/*"],
+      "@server/*": ["./server/*"],
+      "@client/*": ["./client/*"],
+      "@process/*": ["./process/*"]
+    }
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "**/*.vue"],
   "exclude": ["node_modules", "dist"]
 }

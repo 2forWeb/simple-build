@@ -1,8 +1,8 @@
-import { color, bold } from '../util/colors';
-import { IEntry } from '../types/entry';
 import * as esbuild from 'esbuild';
-import { isDev } from '../util/is-dev';
 import path from 'path';
+import { color, bold } from '@util/colors';
+import { IEntry } from '@interfaces/entry';
+import { isDev } from '@util/is-dev';
 import { clean } from 'esbuild-plugin-clean';
 
 export default class BuildTask {

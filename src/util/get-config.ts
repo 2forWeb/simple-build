@@ -1,4 +1,4 @@
-import { IConfig } from '../types/config';
+import type { IConfig } from '@interfaces/config';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
 

@@ -1,7 +1,7 @@
-import BuildTask from './build-task';
 import copy from 'esbuild-copy-files-plugin';
 import path from 'path';
-import { IEntry } from '../types/entry';
+import BuildTask from './build-task';
+import { IEntry } from '@interfaces/entry';
 
 export default class extends BuildTask {
     override Configure(entry: IEntry): void {

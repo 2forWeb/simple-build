@@ -1,5 +1,5 @@
-import { getBuildTasks } from '../util/get-build-tasks';
-import { IConfig } from '../types/config';
+import { getBuildTasks } from '@util/get-build-tasks';
+import type { IConfig } from '@interfaces/config';
 
 export async function buildAll(config: IConfig) {
     const tasks = getBuildTasks(config);

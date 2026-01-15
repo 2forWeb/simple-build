@@ -1,8 +1,8 @@
-import BuildTask from './build-task';
-import path from 'path';
-import { IEntry } from '../types/entry';
-import { exec } from 'node:child_process';
 import * as esbuild from 'esbuild';
+import path from 'path';
+import { exec } from 'node:child_process';
+import BuildTask from './build-task';
+import { IEntry } from '@interfaces/entry';
 
 export default class extends BuildTask {
     declare tsconfigPath: string;

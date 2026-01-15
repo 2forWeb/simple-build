@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+// src/process/build-task.ts
+import * as esbuild from "esbuild";
+import path from "path";
+
 // src/util/colors.ts
 var colors = {
   red: "\x1B[31m",
@@ -13,9 +17,6 @@ var colors = {
 var color = (color2, text) => `${colors[color2]}${text}${colors.reset}`;
 var bold = (text) => `${colors.bold}${text}${colors.resetBold}`;
 
-// src/process/build-task.ts
-import * as esbuild from "esbuild";
-
 // src/util/is-dev.ts
 import "dotenv/config";
 function isDev() {
@@ -23,7 +24,6 @@ function isDev() {
 }
 
 // src/process/build-task.ts
-import path from "path";
 import { clean } from "esbuild-plugin-clean";
 var BuildTask = class {
   constructor(taskName, clientRoot, assetRoot, entry) {
@@ -149,9 +149,9 @@ var copy_files_default = class extends BuildTask {
 };
 
 // src/process/typescript.ts
+import * as esbuild2 from "esbuild";
 import path3 from "path";
 import { exec } from "node:child_process";
-import * as esbuild2 from "esbuild";
 var typescript_default = class extends BuildTask {
   Configure(entry) {
     if (entry.tsconfigPath === void 0) {

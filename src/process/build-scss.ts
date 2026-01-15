@@ -1,6 +1,6 @@
 import { sassPlugin } from 'esbuild-sass-plugin';
 import BuildTask from './build-task';
-import { IEntry } from '../types/entry';
+import type { IEntry } from '@interfaces/entry';
 
 export default class extends BuildTask {
     override Configure(entry: IEntry): void {

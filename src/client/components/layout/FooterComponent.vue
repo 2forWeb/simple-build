@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { getVersion } from '../../api/get-version';
+import { getVersion } from '@client/api/get-version';
 
 const version = ref('');
 

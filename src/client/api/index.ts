@@ -1,8 +1,4 @@
-export interface ApiResponse<T> {
-    data: T | null;
-    success: boolean;
-    error?: string;
-}
+import type { ApiResponse } from '@interfaces/api';
 
 export const api = {
     apiCall: async <T>(route: string, method: Request['method'], params: Record<string, string>): Promise<ApiResponse<T>> => {

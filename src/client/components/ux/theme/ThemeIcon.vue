@@ -9,7 +9,7 @@ import { computed } from 'vue';
 import { themeState } from './state';
 import { loadPreferredTheme } from './load-preferred-theme';
 import { updateThemeClass } from './update-theme-class';
-import { setCookie } from '../../../utils/cookie';
+import { setCookie } from '@client/utils/cookie';
 
 const themeText = computed(() => (themeState.darkMode ? '🌙' : '☀️'));
 
