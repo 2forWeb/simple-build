@@ -167,11 +167,11 @@ var typescript_default = class extends BuildTask {
     if (this.options?.plugins?.length) {
       await esbuild2.build(this.options);
     }
-    return new Promise((resolve3, reject) => {
+    return new Promise((resolve4, reject) => {
       exec(`./node_modules/.bin/tsc --project ${path4}`, (error, stdout, stderr) => {
         console.log(stdout);
         if (error === null) {
-          resolve3();
+          resolve4();
         }
         console.log(stderr);
         reject(error);
@@ -243,15 +243,34 @@ function isServerMode() {
 
 // src/server/express.ts
 import express from "express";
+import { fileURLToPath as fileURLToPath2 } from "node:url";
+import { dirname as dirname2, resolve as resolve3 } from "node:path";
+
+// src/server/routes/version.ts
+import { readFileSync } from "fs";
+import { resolve as resolve2 } from "path";
 import { fileURLToPath } from "node:url";
-import { dirname, resolve as resolve2 } from "node:path";
-var __filename = fileURLToPath(import.meta.url);
-var __dirname = dirname(__filename);
+import { dirname } from "node:path";
+var versionRoute = (app) => {
+  app.get("/api/version", (_req, res) => {
+    const __filename2 = fileURLToPath(import.meta.url);
+    const __dirname2 = dirname(__filename2);
+    const packageFile = readFileSync(resolve2(__dirname2, "../package.json"), "utf-8");
+    const packageJson = JSON.parse(packageFile);
+    const version = packageJson.version || "1.0.0";
+    res.json({ version, packageFile });
+  });
+};
+
+// src/server/express.ts
+var __filename = fileURLToPath2(import.meta.url);
+var __dirname = dirname2(__filename);
 function startExpressServer() {
   const app = express();
   const port = 3333;
-  const publicDir = resolve2(__dirname, "../public");
+  const publicDir = resolve3(__dirname, "../public");
   app.use(express.static(publicDir));
+  versionRoute(app);
   app.listen(port, () => {
     console.log(`Simple-Build Listening on port ${port}`);
   });

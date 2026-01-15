@@ -13,7 +13,7 @@ import ThemeIcon from '../ux/theme/ThemeIcon.vue';
 <style module>
 .component {
     background-color: var(--surface);
-    padding: 20px 40px;
+    padding: var(--space-20) var(--space-40);
     display: flex;
     align-items: center;
     justify-content: space-between;

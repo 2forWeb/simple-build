@@ -2,7 +2,7 @@
     <div :class="$style.container">
         <HeaderComponent />
 
-        <div style="flex-grow: 1">
+        <div :class="$style.content">
             <h1>Content Here!</h1>
         </div>
 
@@ -20,5 +20,11 @@ import FooterComponent from './components/layout/FooterComponent.vue';
     display: flex;
     flex-direction: column;
     height: 100vh;
+}
+
+.content {
+    flex-grow: 1;
+    padding: var(--space-40);
+    overflow: auto;
 }
 </style>

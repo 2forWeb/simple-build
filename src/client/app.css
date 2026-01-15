@@ -12,6 +12,11 @@
     --success: #6E9F72;
     --warning: #D8A24A;
     --error: #C45B4D;
+
+    --color-2forweb: rgb(8, 166, 92);
+
+    --space-20: 1.2rem;
+    --space-40: 2rem;
 }
 
 [data-theme=dark] {
