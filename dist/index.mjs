@@ -258,7 +258,10 @@ var versionRoute = (app) => {
     const packageFile = readFileSync(resolve2(__dirname2, "../package.json"), "utf-8");
     const packageJson = JSON.parse(packageFile);
     const version = packageJson.version || "1.0.0";
-    res.json({ version, packageFile });
+    const response = {
+      version
+    };
+    res.json(response);
   });
 };
 

@@ -3,6 +3,7 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
+import { VersionResponse } from '@interfaces/api';
 
 export const versionRoute = (app: Application) => {
     app.get('/api/version', (_req, res) => {
@@ -13,6 +14,10 @@ export const versionRoute = (app: Application) => {
         const packageJson = JSON.parse(packageFile);
         const version = packageJson.version || '1.0.0';
 
-        res.json({ version, packageFile });
+        const response: VersionResponse = {
+            version,
+        };
+
+        res.json(response);
     });
 };
