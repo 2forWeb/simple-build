@@ -1,8 +1,7 @@
 # simple-build
 
-[![Version](https://img.shields.io/badge/version-1.0.7-blue.svg)](https://github.com/2forWeb/simple-build)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/2forWeb/simple-build)
 [![Lint](https://github.com/2forWeb/simple-build/actions/workflows/lint.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/lint.yaml)
-[![TypeCheck](https://github.com/2forWeb/simple-build/actions/workflows/typecheck.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/typecheck.yaml)
 [![Build](https://github.com/2forWeb/simple-build/actions/workflows/build.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/build.yaml)
 [![Tests](https://github.com/2forWeb/simple-build/actions/workflows/tests.yaml/badge.svg)](https://github.com/2forWeb/simple-build/actions/workflows/tests.yaml)
 
@@ -25,8 +24,8 @@ The system is based on the concept of a source client folder and an output
 folder where the files will be placed.
 
 With the intention not to pollute the `./assets` folder for asset mapper,
-the system uses the `./client` folder as the source folder for scss and
-typescript files.
+the system uses the `./client` folder as the default source folder for files like
+scss and TypeScript files.
 
 All paths you provide later to the different build tasks will be relative
 to these client and assets folders. But you can circumvent this by
@@ -45,38 +44,40 @@ presence or absence of source maps. This can be configured in `.env` or
 If you pass the parameter `watch` to your build script, the system will
 automatically watch for changes in the client folder.
 
+### Serve
+
+If you pass the `serve` parameter to your build script, it will launch an
+express server with a GUI to view, tweak and create build option files.
+
 ### Example build file
 
 Write a js build file on the root of your application like this:
 
 ```javascript
-import { build, BuildTypeScript, BuildScss } from '@2forweb/simple-build';
-import * as path from 'path';
-
-await build({
-    clientRoot: path.resolve(__dirname, './client'),
-    assetRoot: path.resolve(__dirname, './assets'),
+export default {
+    clientRoot: './client', // relative to the path you call the build command from
+    assetRoot: './assets',
     buildTasks: [
         {
-            name: 'TypeScript controller',
-            task: BuildTypeScript,
+            name: 'TypeScript Controllers',
+            task: 'typescript',
             entry: {
                 tsconfigPath: ['./controllers/tsconfig.json'],
             },
         },
         {
             name: 'Sass',
-            task: BuildScss,
+            task: 'scss',
             entry: {
                 entryPoints: ['./styles/app.scss'],
                 outFile: 'app.css',
             },
         },
     ],
-});
+};
 ```
 
-This will use `tsc` to typecheck and build the typescript files in the
+This will use `tsc` to typecheck and build the TypeScript files in the
 `./client/controllers` folder as specified by your `tsconfig.json` file
 and `sass` to build the `./client/styles/app.scss` and place it under
 `./assets/app.css`, ready for Asset Mapper to pick it up.
@@ -86,32 +87,33 @@ The next step would be to add these scripts to your `package.json` file:
 ```json
 {
     "scripts": {
-        "build": "node ./build.js",
-        "build:watch": "node ./build.js watch"
+        "build": "node ./node_modules/.bin/simple-build",
+        "build:serve": "node ./node_modules/.bin/simple-build serve",
+        "build:watch": "node ./node_modules/.bin/simple-build watch"
     }
 }
 ```
 
 ## Tasks
 
-### BuildTask
+### `build`
 
 Generic esbuild build task using entry points and an `outDir` or `outFile`
 parameters. This will determine weather to bundle or to place all the files
 in the directory specified.
 
-### BuildScss
+### `scss`
 
 A build task designed to build scss files.
 
-### CopyFiles
+### `copy-files`
 
 This will use the `copy-files-plugin` to copy different assets to
 the `./assets` folder.
 
-### BuildTypeScript
+### `typescript`
 
-A build task designed to build typescript files using a `tsconfig.json` 
+A build task designed to build TypeScript files using a `tsconfig.json` 
 configuration file.
 
 ## Entry

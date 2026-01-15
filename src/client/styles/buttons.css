@@ -1,0 +1,27 @@
+.btn {
+    display: inline-block;
+    padding: var(--space-10) var(--space-20);
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    color: var(--text-primary);
+
+    transition: background-color 0.5s ease-in-out;
+
+    &.primary {
+        background-color: var(--accent-primary);
+
+        &:hover {
+            background-color: var(--accent-primary-hover);
+        }
+    }
+
+    &.secondary {
+        background-color: var(--accent-secondary);
+
+        &:hover {
+            background-color: var(--highlight);
+        }
+    }
+}

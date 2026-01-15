@@ -17,8 +17,7 @@ const { tabs, selectedTabIndex = 0 } = defineProps<{
 
 <style module>
 .component {
-    padding: var(--space-20);
-    border-bottom: 1px solid var(--border);
+    padding: 0 var(--space-20);
     display: flex;
     gap: var(--space-20);
     flex-direction: row;
