@@ -16,7 +16,6 @@ export const colors = {
     yellow: '\x1b[33m',
     white: '\x1b[37m',
     reset: '\x1b[0m',
-
     bold: '\x1b[1m',
     resetBold: '\x1b[22m',
 };
