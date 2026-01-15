@@ -7,3 +7,7 @@ export interface ApiResponse<T> {
 export interface VersionResponse {
     version: string;
 }
+
+export interface ConfigFilesResponse {
+    files: Record<string, string>;
+}

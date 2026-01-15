@@ -18,11 +18,11 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            '@interfaces/*': resolve(__dirname, './interfaces'),
-            '@util/*': resolve(__dirname, './util'),
-            '@server/*': resolve(__dirname, './server'),
-            '@client/*': resolve(__dirname, './client'),
-            '@process/*': resolve(__dirname, './process'),
+            '@interfaces': resolve(__dirname, './src/interfaces'),
+            '@util': resolve(__dirname, './src/util'),
+            '@server': resolve(__dirname, './src/server'),
+            '@client': resolve(__dirname, './src/client'),
+            '@process': resolve(__dirname, './src/process'),
         },
     },
 });

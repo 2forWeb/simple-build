@@ -167,11 +167,11 @@ var typescript_default = class extends BuildTask {
     if (this.options?.plugins?.length) {
       await esbuild2.build(this.options);
     }
-    return new Promise((resolve4, reject) => {
+    return new Promise((resolve5, reject) => {
       exec(`./node_modules/.bin/tsc --project ${path4}`, (error, stdout, stderr) => {
         console.log(stdout);
         if (error === null) {
-          resolve4();
+          resolve5();
         }
         console.log(stderr);
         reject(error);
@@ -219,11 +219,18 @@ function isWatching() {
 // src/util/get-config.ts
 import { resolve } from "path";
 import { existsSync } from "fs";
+
+// src/util/get-config-file-names.ts
+function getConfigFileNames() {
+  return ["simple-build.config.js", "simple-build.config.cjs", "simple-build.config.mjs"];
+}
+
+// src/util/get-config.ts
 async function getConfig() {
-  const configFileNames = ["simple-build.config.js", "simple-build.config.cjs", "simple-build.config.mjs"];
+  const configFileNames2 = getConfigFileNames();
   const curDir = process.cwd();
-  for (let i = 0; i < configFileNames.length; i++) {
-    const configFilePath = resolve(curDir, configFileNames[i]);
+  for (let i = 0; i < configFileNames2.length; i++) {
+    const configFilePath = resolve(curDir, configFileNames2[i]);
     if (existsSync(configFilePath)) {
       const configModule = await import(configFilePath);
       return configModule.default || configModule;
@@ -244,7 +251,7 @@ function isServerMode() {
 // src/server/express.ts
 import express from "express";
 import { fileURLToPath as fileURLToPath2 } from "node:url";
-import { dirname as dirname2, resolve as resolve3 } from "node:path";
+import { dirname as dirname2, resolve as resolve4 } from "node:path";
 
 // src/server/routes/version.ts
 import { readFileSync } from "fs";
@@ -265,15 +272,53 @@ var versionRoute = (app) => {
   });
 };
 
+// src/server/routes/config-files.ts
+import { promises as fs } from "fs";
+import { resolve as resolve3, relative } from "path";
+var configFileNames = getConfigFileNames();
+async function findConfigFiles(dir, results = []) {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = resolve3(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (["node_modules", ".git", ".cache", "var", "cache", "public"].includes(entry.name)) continue;
+      await findConfigFiles(fullPath, results);
+    } else if (entry.isFile() && configFileNames.includes(entry.name)) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+var configFilesRoute = (app) => {
+  app.get("/api/config-files", async (_req, res) => {
+    try {
+      const root = process.cwd();
+      const foundFiles = await findConfigFiles(root);
+      const files = {};
+      for (const absPath of foundFiles) {
+        const content = await fs.readFile(absPath, "utf-8");
+        const relPath = "/" + relative(root, absPath);
+        files[relPath] = content;
+      }
+      const response = { files };
+      res.json(response);
+    } catch (err) {
+      console.error("Error scanning config files:", err);
+      res.status(500).json({ error: "Failed to scan config files" });
+    }
+  });
+};
+
 // src/server/express.ts
 var __filename = fileURLToPath2(import.meta.url);
 var __dirname = dirname2(__filename);
 function startExpressServer() {
   const app = express();
   const port = 3333;
-  const publicDir = resolve3(__dirname, "../public");
+  const publicDir = resolve4(__dirname, "../public");
   app.use(express.static(publicDir));
   versionRoute(app);
+  configFilesRoute(app);
   app.listen(port, () => {
     console.log(`Simple-Build Listening on port ${port}`);
   });

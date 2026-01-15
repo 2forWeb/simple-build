@@ -1,9 +1,10 @@
-import type { IConfig } from '@interfaces/config';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
+import type { IConfig } from '@interfaces/config';
+import { getConfigFileNames } from '@util/get-config-file-names';
 
 export async function getConfig(): Promise<IConfig> {
-    const configFileNames = ['simple-build.config.js', 'simple-build.config.cjs', 'simple-build.config.mjs'];
+    const configFileNames = getConfigFileNames();
 
     const curDir = process.cwd();
 

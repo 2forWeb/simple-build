@@ -1,18 +1,15 @@
 <template>
     <div :class="$style.container">
         <HeaderComponent />
-
-        <div :class="$style.content">
-            <h1>Content Here!</h1>
-        </div>
-
+        <ContentComponent />
         <FooterComponent />
     </div>
 </template>
 
 <script setup lang="ts">
-import HeaderComponent from './components/layout/HeaderComponent.vue';
-import FooterComponent from './components/layout/FooterComponent.vue';
+import HeaderComponent from '@client/components/layout/HeaderComponent.vue';
+import FooterComponent from '@client/components/layout/FooterComponent.vue';
+import ContentComponent from '@client/components/layout/ContentComponent.vue';
 </script>
 
 <style module>
@@ -20,11 +17,5 @@ import FooterComponent from './components/layout/FooterComponent.vue';
     display: flex;
     flex-direction: column;
     height: 100vh;
-}
-
-.content {
-    flex-grow: 1;
-    padding: var(--space-40);
-    overflow: auto;
 }
 </style>
