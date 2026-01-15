@@ -294,11 +294,11 @@ var configFilesRoute = (app) => {
     try {
       const root = process.cwd();
       const foundFiles = await findConfigFiles(root);
-      const files = {};
+      const files = [];
       for (const absPath of foundFiles) {
         const content = await fs.readFile(absPath, "utf-8");
         const relPath = "/" + relative(root, absPath);
-        files[relPath] = content;
+        files.push({ filePath: relPath, fileContents: content });
       }
       const response = { files };
       res.json(response);

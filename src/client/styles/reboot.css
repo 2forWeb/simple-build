@@ -24,7 +24,7 @@ a {
     }
 }
 
-code {
+code, textarea {
     font-family:
             "Courier New",
             Courier,

@@ -8,6 +8,11 @@ export interface VersionResponse {
     version: string;
 }
 
+export interface ConfigFileResponseItem {
+    filePath: string;
+    fileContents: string;
+}
+
 export interface ConfigFilesResponse {
-    files: Record<string, string>;
+    files: ConfigFileResponseItem[];
 }

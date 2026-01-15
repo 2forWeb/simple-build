@@ -4,12 +4,14 @@
             <UxLoading v-if="isLoading" />
 
             <template v-else>
-                <TabSet v-if="tabs.length" :tabs="tabs" />
+                <TabSet v-if="tabs.length" :tabs="tabs" @click="onTabSelected" />
                 <div v-if="!tabs.length">No config files found!</div>
 
                 <UxButton text="Add another Config File!" />
             </template>
         </TabContainer>
+
+        <ConfigText :text="selectedText" />
     </div>
 </template>
 
@@ -21,6 +23,7 @@ import { configFilesState } from '@client/modules/config-files/state';
 import TabContainer from '@client/components/ux/tab/TabContainer.vue';
 import UxButton from '@client/components/ux/UxButton.vue';
 import UxLoading from '@client/components/ux/UxLoading.vue';
+import ConfigText from '@client/components/ux/config-parser/ConfigText.vue';
 
 const isLoading = ref(true);
 onMounted(async () => {
@@ -28,7 +31,16 @@ onMounted(async () => {
     isLoading.value = false;
 });
 
-const tabs = computed(() => Object.keys(configFilesState.files).map((key) => ({ label: key })));
+const tabs = computed(() => configFilesState.files.map((item) => ({ label: item.filePath })));
+const selectedTabIndex = ref(0);
+
+const selectedText = computed(() =>
+    configFilesState.files.length ? configFilesState.files[selectedTabIndex.value].fileContents : ''
+);
+
+const onTabSelected = (index: number) => {
+    selectedTabIndex.value = index;
+};
 </script>
 
 <style module>

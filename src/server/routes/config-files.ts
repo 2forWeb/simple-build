@@ -1,7 +1,7 @@
 import type { Application } from 'express';
 import { promises as fs } from 'fs';
 import { resolve, relative } from 'path';
-import type { ConfigFilesResponse } from '@interfaces/api';
+import type { ConfigFilesResponse, ConfigFileResponseItem } from '@interfaces/api';
 import { getConfigFileNames } from '@util/get-config-file-names';
 
 const configFileNames = getConfigFileNames();
@@ -33,12 +33,12 @@ export const configFilesRoute = (app: Application) => {
             const root = process.cwd();
             const foundFiles = await findConfigFiles(root);
 
-            const files: Record<string, string> = {};
+            const files: ConfigFileResponseItem[] = [];
 
             for (const absPath of foundFiles) {
                 const content = await fs.readFile(absPath, 'utf-8');
                 const relPath = '/' + relative(root, absPath);
-                files[relPath] = content;
+                files.push({ filePath: relPath, fileContents: content });
             }
 
             const response: ConfigFilesResponse = { files };

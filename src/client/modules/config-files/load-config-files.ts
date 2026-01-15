@@ -7,4 +7,6 @@ export const loadConfigFiles = async () => {
     if (configFiles.success && configFiles.data) {
         configFilesState.files = configFiles.data.files;
     }
+
+    configFilesState.files.push({ filePath: '/simple-build.config.mjs', fileContents: 'export default {};' });
 };
