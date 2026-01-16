@@ -3,13 +3,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
+import { computed, defineProps } from 'vue';
 
 const { text } = defineProps<{
     text: string;
 }>();
 
-const innerText = ref(text);
+const innerText = computed(() => text);
 </script>
 
 <style module>

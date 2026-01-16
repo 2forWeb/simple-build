@@ -6,8 +6,8 @@
     border: none;
     border-radius: 5px;
     color: var(--text-primary);
-
     transition: background-color 0.5s ease-in-out;
+    cursor: pointer;
 
     &.primary {
         background-color: var(--accent-primary);

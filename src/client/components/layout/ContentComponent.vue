@@ -4,14 +4,18 @@
             <UxLoading v-if="isLoading" />
 
             <template v-else>
-                <TabSet v-if="tabs.length" :tabs="tabs" @click="onTabSelected" />
+                <TabSet v-if="tabs.length" :tabs="tabs" @tab-selected="onTabSelected" />
                 <div v-if="!tabs.length">No config files found!</div>
 
                 <UxButton text="Add another Config File!" />
             </template>
         </TabContainer>
 
-        <ConfigText :text="selectedText" />
+        <div :class="$style.container">
+            <ConfigText v-if="!isLoading" :text="selectedText" />
+
+            <UxLoading v-else />
+        </div>
     </div>
 </template>
 
@@ -40,6 +44,7 @@ const selectedText = computed(() =>
 
 const onTabSelected = (index: number) => {
     selectedTabIndex.value = index;
+    console.log(configFilesState.files[index]);
 };
 </script>
 
@@ -48,5 +53,10 @@ const onTabSelected = (index: number) => {
     flex-grow: 1;
     padding: var(--space-20) var(--space-40);
     overflow: auto;
+}
+
+.container {
+    padding: var(--space-20) var(--space-40);
+    height: 100%;
 }
 </style>
