@@ -6,6 +6,7 @@
     border: none;
     border-radius: 5px;
     color: var(--text-primary);
+    white-space: nowrap;
     transition: background-color 0.5s ease-in-out;
     cursor: pointer;
 

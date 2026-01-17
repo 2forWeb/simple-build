@@ -298,7 +298,12 @@ var configFilesRoute = (app) => {
       for (const absPath of foundFiles) {
         const content = await fs.readFile(absPath, "utf-8");
         const relPath = "/" + relative(root, absPath);
-        files.push({ filePath: relPath, fileContents: content });
+        const configModule = await import(absPath);
+        files.push({
+          filePath: relPath,
+          fileContents: content,
+          configObject: configModule.default || configModule
+        });
       }
       const response = { files };
       res.json(response);

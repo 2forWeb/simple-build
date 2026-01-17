@@ -7,7 +7,7 @@
                 <TabSet v-if="tabs.length" :tabs="tabs" @tab-selected="onTabSelected" />
                 <div v-if="!tabs.length">No config files found!</div>
 
-                <UxButton text="Add another Config File!" />
+                <UxButton :class="$style.addBtn" text="Add another Config File!" />
             </template>
         </TabContainer>
 
@@ -56,7 +56,11 @@ const onTabSelected = (index: number) => {
 }
 
 .container {
-    padding: var(--space-20) var(--space-40);
+    padding: var(--space-20);
     height: 100%;
+}
+
+.addBtn {
+    margin: 0 var(--space-20);
 }
 </style>

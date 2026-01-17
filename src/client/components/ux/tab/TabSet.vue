@@ -34,6 +34,7 @@ const selectTab = (index: number) => {
 .component {
     padding: 0 var(--space-20);
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-20);
     flex-direction: row;
     align-items: center;

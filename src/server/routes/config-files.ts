@@ -3,6 +3,7 @@ import { promises as fs } from 'fs';
 import { resolve, relative } from 'path';
 import type { ConfigFilesResponse, ConfigFileResponseItem } from '@interfaces/api';
 import { getConfigFileNames } from '@util/get-config-file-names';
+import type { IConfig } from '@interfaces/config';
 
 const configFileNames = getConfigFileNames();
 
@@ -38,7 +39,12 @@ export const configFilesRoute = (app: Application) => {
             for (const absPath of foundFiles) {
                 const content = await fs.readFile(absPath, 'utf-8');
                 const relPath = '/' + relative(root, absPath);
-                files.push({ filePath: relPath, fileContents: content });
+                const configModule = await import(absPath);
+                files.push({
+                    filePath: relPath,
+                    fileContents: content,
+                    configObject: (configModule.default || configModule) as Partial<IConfig>,
+                });
             }
 
             const response: ConfigFilesResponse = { files };

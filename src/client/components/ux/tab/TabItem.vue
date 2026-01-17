@@ -25,6 +25,7 @@ const onClick = () => {
     display: block;
     padding: var(--space-10) var(--space-20);
     color: var(--text-secondary);
+    white-space: nowrap;
 }
 
 .selected {
