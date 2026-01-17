@@ -50,14 +50,16 @@ const onTabSelected = (index: number) => {
 
 <style module>
 .component {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     padding: var(--space-20) var(--space-40);
     overflow: auto;
 }
 
 .container {
-    padding: var(--space-20);
-    height: 100%;
+    padding: var(--space-20) var(--space-20) 0;
+    flex-grow: 1;
 }
 
 .addBtn {
