@@ -26,6 +26,6 @@
       "@process/*": ["./process/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.vue"],
+  "include": ["**/*.ts", "**/*.vue", "**/*.svg"],
   "exclude": ["node_modules", "dist"]
 }

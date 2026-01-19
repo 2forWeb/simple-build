@@ -1,10 +1,14 @@
 <template>
-    <a href="#" :class="{ [$style.component]: true, [$style.selected]: selected }" @click.prevent="onClick" v-text="tab.label" />
+    <a href="#" :class="{ [$style.component]: true, [$style.selected]: selected }" @click.prevent="onClick">
+        <UxIcon v-if="tab.icon" :icon="tab.icon" />
+        {{ tab.label }}
+    </a>
 </template>
 
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue';
 import { TabItemProps } from './types';
+import UxIcon from '@client/components/ux/icons/UxIcon.vue';
 
 const { tab, selected } = defineProps<{
     tab: TabItemProps;

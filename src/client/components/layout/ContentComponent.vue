@@ -12,9 +12,21 @@
         </TabContainer>
 
         <div :class="$style.container">
-            <ConfigText v-if="!isLoading" :text="selectedText" />
+            <div :class="$style.containerTabs">
+                <TabSet
+                    :class="$style.tabSetDirection"
+                    :tabs="iconTabs"
+                    direction="vertical"
+                    compact
+                    @tab-selected="onIconsTabSelected"
+                />
+            </div>
 
-            <UxLoading v-else />
+            <div :class="$style.containerContents">
+                <ConfigText v-if="!isLoading" :text="selectedText" />
+
+                <UxLoading v-else />
+            </div>
         </div>
     </div>
 </template>
@@ -46,6 +58,11 @@ const onTabSelected = (index: number) => {
     selectedTabIndex.value = index;
     console.log(configFilesState.files[index]);
 };
+
+const iconTabs = [{ icon: 'form' as const }, { icon: 'code' as const }, { icon: 'split' as const }];
+const onIconsTabSelected = (index: number) => {
+    console.log('Icon tab selected:', index);
+};
 </script>
 
 <style module>
@@ -59,6 +76,29 @@ const onTabSelected = (index: number) => {
 
 .container {
     padding: var(--space-20) var(--space-20) 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-20);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .tabSetDirection {
+        flex-direction: row !important;
+    }
+}
+
+.containerTabs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+}
+
+.containerContents {
     flex-grow: 1;
 }
 

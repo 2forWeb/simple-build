@@ -23,5 +23,12 @@ const innerText = computed(() => text);
     font-size: 1.2rem;
     padding: var(--space-20);
     resize: none;
+
+    &:focus,
+    &:active,
+    &:focus-visible {
+        outline: none;
+        border-color: var(--accent-primary);
+    }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.component">
+    <div :class="{ [$style.component]: true, [$style[direction]]: true, [$style.compact]: compact }">
         <TabItem
             v-for="(tab, index) in tabs"
             :key="index"
@@ -16,8 +16,14 @@ import type { TabItemProps } from './types.ts';
 import TabItem from '@client/components/ux/tab/TabItem.vue';
 
 const selectedTabIndex = ref(0);
-const { tabs } = defineProps<{
+const {
+    tabs,
+    direction = 'horizontal',
+    compact = false,
+} = defineProps<{
     tabs: TabItemProps[];
+    direction?: 'vertical' | 'horizontal';
+    compact?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -39,5 +45,19 @@ const selectTab = (index: number) => {
     flex-direction: row;
     align-items: center;
     justify-content: start;
+}
+
+.compact {
+    padding: 0;
+    gap: 0;
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.vertical {
+    flex-direction: column;
+    align-items: stretch;
 }
 </style>
