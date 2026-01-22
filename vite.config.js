@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
@@ -24,5 +25,8 @@ export default defineConfig({
             '@client': resolve(__dirname, './src/client'),
             '@process': resolve(__dirname, './src/process'),
         },
+    },
+    test: {
+        root: resolve(__dirname, './tests'),
     },
 });
