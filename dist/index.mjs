@@ -319,13 +319,25 @@ var __filename = fileURLToPath2(import.meta.url);
 var __dirname = dirname2(__filename);
 function startExpressServer() {
   const app = express();
-  const port = 3333;
+  let port = 3333;
+  const portArg = process.argv.find((arg) => arg.startsWith("--port"));
+  if (portArg) {
+    const portValue = portArg.split("=")[1];
+    if (portValue) {
+      const parsedPort = parseInt(portValue, 10);
+      if (!isNaN(parsedPort)) {
+        port = parsedPort;
+      }
+    }
+  }
   const publicDir = resolve4(__dirname, "../public");
   app.use(express.static(publicDir));
   versionRoute(app);
   configFilesRoute(app);
   app.listen(port, () => {
-    console.log(`Simple-Build Listening on port ${port}`);
+    console.log(
+      color("blue", "Simple-Build") + color("white", " Listening on port ") + bold(color("yellow", port.toString()))
+    );
   });
 }
 
