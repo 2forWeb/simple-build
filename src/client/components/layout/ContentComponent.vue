@@ -3,15 +3,7 @@
         <ConfigTabs />
 
         <div :class="$style.container">
-            <div :class="$style.containerTabs">
-                <TabSet
-                    :class="$style.tabSetDirection"
-                    :tabs="iconTabs"
-                    direction="vertical"
-                    compact
-                    @tab-selected="onIconsTabSelected"
-                />
-            </div>
+            <IconTabs />
 
             <div :class="$style.containerContents">
                 <UxTextArea v-if="!getIsLoading()" v-model="selectedText" />
@@ -25,26 +17,23 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
 import { loadConfigFiles } from '@client/modules/config-files/load-config-files';
-import TabSet from '@client/components/ux/tab/TabSet.vue';
-import { configFilesState } from '@client/modules/config-files/state';
 import UxLoading from '@client/components/ux/UxLoading.vue';
 import UxTextArea from '@client/components/ux/form/UxTextArea.vue';
 import { getSelectedTabIndex } from '@client/components/ux/config-tabs/get-selected-tab-index';
 import ConfigTabs from '@client/components/ux/config-tabs/ConfigTabs.vue';
 import { getIsLoading } from '@client/modules/config-files/get-is-loading';
+import { getFiles } from '@client/modules/config-files/get-files';
+import IconTabs from '@client/components/ux/icon-tabs/IconTabs.vue';
 
 onMounted(async () => {
     await loadConfigFiles();
 });
 
-const selectedText = computed(() =>
-    configFilesState.files.length ? configFilesState.files[getSelectedTabIndex()].fileContents : ''
-);
+const selectedText = computed(() => {
+    const files = getFiles();
 
-const iconTabs = [{ icon: 'form' as const }, { icon: 'code' as const }, { icon: 'split' as const }];
-const onIconsTabSelected = (index: number) => {
-    console.log('Icon tab selected:', index);
-};
+    return files.length ? files[getSelectedTabIndex()].fileContents : '';
+});
 </script>
 
 <style module>
@@ -68,16 +57,6 @@ const onIconsTabSelected = (index: number) => {
     .container {
         flex-direction: column;
     }
-
-    .tabSetDirection {
-        flex-direction: row !important;
-    }
-}
-
-.containerTabs {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-20);
 }
 
 .containerContents {
