@@ -24,6 +24,12 @@ then
   exit 1
 fi
 
+if ! npm run build:vue
+then
+  echo "Vue build failed"
+  exit 1
+fi
+
 echo "------------- Tests -------------"
 
 if ! npm run test
