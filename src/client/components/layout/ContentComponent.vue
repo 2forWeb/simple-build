@@ -1,15 +1,6 @@
 <template>
     <div :class="$style.component">
-        <TabContainer>
-            <UxLoading v-if="isLoading" />
-
-            <template v-else>
-                <TabSet v-if="tabs.length" :tabs="tabs" @tab-selected="onTabSelected" />
-                <div v-if="!tabs.length">No config files found!</div>
-
-                <UxButton :class="$style.addBtn" text="Add another Config File!" />
-            </template>
-        </TabContainer>
+        <ConfigTabs />
 
         <div :class="$style.container">
             <div :class="$style.containerTabs">
@@ -23,7 +14,7 @@
             </div>
 
             <div :class="$style.containerContents">
-                <ConfigText v-if="!isLoading" :text="selectedText" />
+                <UxTextArea v-if="!getIsLoading()" v-model="selectedText" />
 
                 <UxLoading v-else />
             </div>
@@ -32,32 +23,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted } from 'vue';
 import { loadConfigFiles } from '@client/modules/config-files/load-config-files';
 import TabSet from '@client/components/ux/tab/TabSet.vue';
 import { configFilesState } from '@client/modules/config-files/state';
-import TabContainer from '@client/components/ux/tab/TabContainer.vue';
-import UxButton from '@client/components/ux/UxButton.vue';
 import UxLoading from '@client/components/ux/UxLoading.vue';
-import ConfigText from '@client/components/ux/config-parser/ConfigText.vue';
+import UxTextArea from '@client/components/ux/form/UxTextArea.vue';
+import { getSelectedTabIndex } from '@client/components/ux/config-tabs/get-selected-tab-index';
+import ConfigTabs from '@client/components/ux/config-tabs/ConfigTabs.vue';
+import { getIsLoading } from '@client/modules/config-files/get-is-loading';
 
-const isLoading = ref(true);
 onMounted(async () => {
     await loadConfigFiles();
-    isLoading.value = false;
 });
 
-const tabs = computed(() => configFilesState.files.map((item) => ({ label: item.filePath })));
-const selectedTabIndex = ref(0);
-
 const selectedText = computed(() =>
-    configFilesState.files.length ? configFilesState.files[selectedTabIndex.value].fileContents : ''
+    configFilesState.files.length ? configFilesState.files[getSelectedTabIndex()].fileContents : ''
 );
-
-const onTabSelected = (index: number) => {
-    selectedTabIndex.value = index;
-    console.log(configFilesState.files[index]);
-};
 
 const iconTabs = [{ icon: 'form' as const }, { icon: 'code' as const }, { icon: 'split' as const }];
 const onIconsTabSelected = (index: number) => {
@@ -100,9 +82,5 @@ const onIconsTabSelected = (index: number) => {
 
 .containerContents {
     flex-grow: 1;
-}
-
-.addBtn {
-    margin: 0 var(--space-20);
 }
 </style>
