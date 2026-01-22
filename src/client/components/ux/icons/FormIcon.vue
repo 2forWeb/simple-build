@@ -18,12 +18,12 @@
             stroke-linecap="round"
             stroke-linejoin="round"
         />
-        <path d="M6 14H40" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 22H42" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M30 30H42" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M23 22H24" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M23 30H24" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M14 6L14 42" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 14H40" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M30 22H42" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M30 30H42" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M23 22H24" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M23 30H24" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M14 6L14 42" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 </template>
 
