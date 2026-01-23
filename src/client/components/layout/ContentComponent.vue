@@ -6,9 +6,13 @@
             <IconTabs />
 
             <div :class="$style.containerContents">
-                <UxTextArea v-if="!getIsLoading()" v-model="selectedText" />
+                <UxLoading v-if="getIsLoading()" />
 
-                <UxLoading v-else />
+                <div :class="{ [$style.containerInner]: true, [$style.splitView]: shouldShowForm && shouldShowRawText }">
+                    <ContentForm v-if="!getIsLoading() && shouldShowForm" />
+
+                    <RawText v-if="!getIsLoading() && shouldShowRawText" />
+                </div>
             </div>
         </div>
     </div>
@@ -17,23 +21,20 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
 import { loadConfigFiles } from '@client/modules/config-files/load-config-files';
-import UxLoading from '@client/components/ux/UxLoading.vue';
-import UxTextArea from '@client/components/ux/form/UxTextArea.vue';
-import { getSelectedTabIndex } from '@client/components/ux/config-tabs/get-selected-tab-index';
-import ConfigTabs from '@client/components/ux/config-tabs/ConfigTabs.vue';
+import { getSelectedTabIndex } from '@client/components/ux/icon-tabs/get-selected-tab-index';
 import { getIsLoading } from '@client/modules/config-files/get-is-loading';
-import { getFiles } from '@client/modules/config-files/get-files';
+import UxLoading from '@client/components/ux/UxLoading.vue';
+import ConfigTabs from '@client/components/ux/config-tabs/ConfigTabs.vue';
 import IconTabs from '@client/components/ux/icon-tabs/IconTabs.vue';
+import RawText from '@client/components/ux/content-raw-text/RawText.vue';
+import ContentForm from '@client/components/ux/content-form/ContentForm.vue';
 
 onMounted(async () => {
     await loadConfigFiles();
 });
 
-const selectedText = computed(() => {
-    const files = getFiles();
-
-    return files.length ? files[getSelectedTabIndex()].fileContents : '';
-});
+const shouldShowForm = computed(() => getSelectedTabIndex() === 0 || getSelectedTabIndex() === 2);
+const shouldShowRawText = computed(() => getSelectedTabIndex() === 1 || getSelectedTabIndex() === 2);
 </script>
 
 <style module>
@@ -53,13 +54,27 @@ const selectedText = computed(() => {
     gap: var(--space-20);
 }
 
+.containerContents {
+    flex-grow: 1;
+}
+
+.containerInner {
+    height: 100%;
+}
+
+.splitView {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
     }
-}
 
-.containerContents {
-    flex-grow: 1;
+    .splitView {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
