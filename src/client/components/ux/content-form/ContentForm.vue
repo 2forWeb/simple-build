@@ -1,11 +1,11 @@
 <template>
     <div :class="$style.component">
         <UxFormRow label="Client Root Path" name="clientRoot">
-            <UxInput v-model="currentObject.clientRoot" type="text" id="clientRoot" />
+            <UxInput id="clientRoot" v-model="currentObject.clientRoot" type="text" />
         </UxFormRow>
 
         <UxFormRow label="Asset Root Path" name="assetRoot">
-            <UxInput v-model="currentObject.assetRoot" type="text" id="assetRoot" />
+            <UxInput id="assetRoot" v-model="currentObject.assetRoot" type="text" />
         </UxFormRow>
     </div>
 </template>
