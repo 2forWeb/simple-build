@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
 import { TabItemProps } from './types';
 import UxIcon from '@client/components/ux/icons/UxIcon.vue';
 

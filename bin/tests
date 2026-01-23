@@ -8,6 +8,14 @@ then
   exit 1
 fi
 
+echo "------------- Types -------------"
+
+if ! npm run typecheck
+then
+  echo "Type checking failed"
+  exit 1
+fi
+
 echo "------------- Build -------------"
 
 if ! npm run build

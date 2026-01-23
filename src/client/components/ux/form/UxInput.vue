@@ -3,8 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue';
-
 const { type = 'text', id = undefined } = defineProps<{
     modelValue: string | undefined;
     type?: string;

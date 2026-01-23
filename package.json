@@ -8,7 +8,8 @@
         "build:vue": "npx vite build",
         "build:watch": "node ./build.js --watch",
         "publish:package": "npm run definitions && npm run build && npm publish",
-        "test": "vitest run"
+        "test": "vitest run",
+        "typecheck": "./node_modules/.bin/vue-tsc -p ./src/tsconfig.json --noEmit"
     },
     "bin": {
         "simple-build": "dist/index.mjs"
@@ -52,7 +53,8 @@
         "typescript-eslint": "^8.26.0",
         "vite": "^6.4.1",
         "vitest": "^3.0.8",
-        "vue-eslint-parser": "^10.2.0"
+        "vue-eslint-parser": "^10.2.0",
+        "vue-tsc": "^3.2.3"
     },
     "dependencies": {
         "dotenv": "^16.4.7",

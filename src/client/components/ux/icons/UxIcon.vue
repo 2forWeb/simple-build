@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { Component, defineProps } from 'vue';
+import { Component } from 'vue';
 import CodeIcon from '@client/components/ux/icons/CodeIcon.vue';
 import FormIcon from '@client/components/ux/icons/FormIcon.vue';
 import SplitIcon from '@client/components/ux/icons/SpltIcon.vue';

@@ -7,8 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
-
 const { label, name } = defineProps<{
     label: string;
     name: string;
